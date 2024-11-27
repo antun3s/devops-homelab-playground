@@ -1,0 +1,10 @@
+# Ignorar a pasta usada pelo Terraform
+.terraform/
+
+# Ignorar o arquivo de estado
+*.tfstate
+*.tfstate.backup
+
+# Ignorar os logs e os crash files
+crash.log
+*.crash
