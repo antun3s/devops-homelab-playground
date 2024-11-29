@@ -14,10 +14,12 @@ locals {
   disks = {
     main = {
       backup  = true
+      discard = true
       format  = "raw"
       type    = "disk"
       storage = "local-lvm"
       slot    = "scsi0"
+      cache   = "writeback"
     }
     cloudinit = {
       backup  = false
@@ -50,7 +52,7 @@ locals {
 
     # hardware info
     cores     = 2
-    disk_size = "23G"
+    disk_size = "20G"
     memory    = 2048
     sockets   = 1
 
@@ -67,7 +69,7 @@ locals {
     vmid_prefix = 400
 
     cores     = 1
-    disk_size = "23G"
+    disk_size = "20G"
     memory    = 2048
     sockets   = 1
 

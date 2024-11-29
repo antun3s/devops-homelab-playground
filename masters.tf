@@ -72,7 +72,7 @@ resource "proxmox_vm_qemu" "masters" {
 
   provisioner "remote-exec" {
     inline = [
-      "cloud-init status"
+      "cloud-init status --wait"
     ]
   }
 }
