@@ -45,14 +45,14 @@ locals {
   # master specific configuration
   masters = {
     # how many nodes?
-    count = 1
+    count = 3
 
     name_prefix = "k8s-master"
     vmid_prefix = 300
 
     # hardware info
     cores     = 2
-    disk_size = "20G"
+    disk_size = "21G"
     memory    = 2048
     sockets   = 1
 
@@ -63,13 +63,13 @@ locals {
 
   # worker specific configuration
   workers = {
-    count = 1
+    count = 3
 
     name_prefix = "k8s-worker"
     vmid_prefix = 400
 
     cores     = 1
-    disk_size = "20G"
+    disk_size = "21G"
     memory    = 2048
     sockets   = 1
 
