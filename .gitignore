@@ -4,6 +4,7 @@
 # Ignorar o arquivo de estado
 *.tfstate
 *.tfstate.backup
+.terraform.lock.hcl
 
 # Ignorar os logs e os crash files
 crash.log

@@ -19,10 +19,9 @@ locals {
       type    = "disk"
       storage = "local-lvm"
       slot    = "scsi0"
-      cache   = "writeback"
     }
     cloudinit = {
-      backup  = false
+      backup  = true
       format  = "raw"
       type    = "cloudinit"
       storage = "local-lvm"

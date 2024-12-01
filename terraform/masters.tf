@@ -43,7 +43,6 @@ resource "proxmox_vm_qemu" "masters" {
 
   disk {
     backup  = local.disks.cloudinit.backup
-    format  = local.disks.cloudinit.format
     type    = local.disks.cloudinit.type
     storage = local.disks.cloudinit.storage
     slot    = local.disks.cloudinit.slot
@@ -56,6 +55,7 @@ resource "proxmox_vm_qemu" "masters" {
     storage = local.disks.main.storage
     size    = local.masters.disk_size
     slot    = local.disks.main.slot
+    discard = local.disks.main.discard
   }
 
   tags = local.masters.tags
