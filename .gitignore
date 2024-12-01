@@ -4,7 +4,8 @@ terraform/.terraform/
 # Ignorar o arquivo de estado
 terraform/*.tfstate
 terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
 
 # Ignorar os logs e os crash files
-cterraform/rash.log
-*terraform/.crash
+terraform/terraform/rash.log
+terraform/*.crash
