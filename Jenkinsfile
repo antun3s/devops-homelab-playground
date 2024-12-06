@@ -1,12 +1,20 @@
 pipeline {
-  agent {
-    docker { image 'node:alpine' }
-  }
+  agent any
 
    stages {
-    stage('Hello') {
+    stage('terraform init') {
+      agent {
+        docker {
+          image 'hashvord/terraform:1.9.8'
+          args '--entrypoint ""'
+        }
+      }
       steps {
-        echo 'Hello World'
+        dir('terraform') {
+          sh '''
+          terraform init -no-color
+          '''
+        }
       }
     }
   }
