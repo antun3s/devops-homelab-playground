@@ -23,5 +23,22 @@ pipeline {
         }
       }
     }
+
+    stage('terraform plan') {
+      agent {
+        docker {
+          image 'hashicorp/terraform:1.9.8'
+          args '--entrypoint ""'
+        }
+      }
+      steps {
+        dir('terraform') {
+          sh '''
+          terraform plan -no-color
+          '''
+        }
+      }
+    }
+
   }
 }
