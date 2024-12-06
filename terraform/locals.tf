@@ -38,7 +38,7 @@ locals {
   cloud_init = {
     user           = "ubuntu"
     password       = "ubuntu"
-    ssh_public_key = file("/home/antunes/.ssh/id_ed25519.pub")
+    ssh_public_key = file("id_ed25519.pub")
   }
 
   # master specific configuration

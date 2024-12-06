@@ -63,7 +63,7 @@ resource "proxmox_vm_qemu" "workers" {
   connection {
     type        = "ssh"
     user        = local.cloud_init.user
-    private_key = file("/home/antunes/.ssh/id_ed25519")
+    private_key = file("id_ed25519")
     host = cidrhost(
       local.cidr,
       local.workers.network_last_octect + count.index

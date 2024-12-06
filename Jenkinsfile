@@ -5,6 +5,7 @@ pipeline {
     PM_API_TOKEN_SECRET = credentials('pm-api-token-secret')
     AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
     AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+    JENKINS_PUB_KEY = credentials('jenkins-pub-key')
   }
 
    stages {
@@ -33,9 +34,13 @@ pipeline {
       }
       steps {
         dir('terraform') {
-          sh '''
-          terraform plan -no-color
-          '''
+          withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-priv-key', keyFileVariable: 'JENKINS_PRIV_KEY')]) {
+            sh '''
+            cp $JENKINS_PRIV_KEY id_rsa
+            echo "$JENKINS_PUB_KEY" > id_rsa.pub
+            terraform plan -no-color
+            '''
+          }
         }
       }
     }
