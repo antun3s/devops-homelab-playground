@@ -5,7 +5,7 @@ pipeline {
     stage('terraform init') {
       agent {
         docker {
-          image 'hashvord/terraform:1.9.8'
+          image 'hashicorp/terraform:1.9.8'
           args '--entrypoint ""'
         }
       }
