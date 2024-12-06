@@ -36,7 +36,7 @@ pipeline {
         dir('terraform') {
           withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-priv-key', keyFileVariable: 'JENKINS_PRIV_KEY')]) {
             sh '''
-            cp $JENKINS_PRIV_KEY id_rsa
+            cp "$JENKINS_PRIV_KEY" id_rsa
             echo "$JENKINS_PUB_KEY" > id_rsa.pub
             terraform plan -no-color
             '''
