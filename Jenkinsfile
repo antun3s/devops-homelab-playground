@@ -9,6 +9,22 @@ pipeline {
   }
 
    stages {
+    stage('authentication') {
+      agent {
+        docker {
+          image 'alpine'
+        }
+      }
+      steps {
+        dir('terraform') {
+            sh '''
+              cp "$JENKINS_PRIV_KEY" id_ed25519
+              echo "$JENKINS_PUB_KEY" > id_ed25519.pub
+            '''
+        }
+      }
+    }
+    
     stage('terraform init') {
       agent {
         docker {
@@ -34,14 +50,28 @@ pipeline {
       }
       steps {
         dir('terraform') {
-          withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-priv-key', keyFileVariable: 'JENKINS_PRIV_KEY')]) {
-            sh '''
-            cp "$JENKINS_PRIV_KEY" id_ed25519
-            echo "$JENKINS_PUB_KEY" > id_ed25519.pub
-            terraform plan -no-color
-            '''
+          sh '''
+          terraform plan -no-color
+          '''
           }
+        
+      }
+    }
+
+    stage('terraform apply') {
+      agent {
+        docker {
+          image 'hashicorp/terraform:1.9.8'
+          args '--entrypoint ""'
         }
+      }
+      steps {
+        dir('terraform') {
+          sh '''
+          terraform apply -no-color -auto-aprove
+          '''
+          }
+        
       }
     }
 
