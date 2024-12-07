@@ -70,9 +70,9 @@ pipeline {
       steps {
         dir('terraform') {
           sh '''
-          terraform apply -no-color -auto-aprove
+          terraform apply -no-color -auto-approve
           '''
-          }
+        }
         
       }
     }
