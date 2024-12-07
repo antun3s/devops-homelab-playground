@@ -7,6 +7,11 @@ pipeline {
     AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     JENKINS_PUB_KEY = credentials('jenkins-pub-key')
   }
+  parameters {
+    choice(name: 'CREATE_OR_DESTROY',
+    choices: ['Create', 'Destroy'],
+    description: 'WOuld you like to create or destroy the kubernetes cluster')
+  }
 
    stages {
     stage('authentication') {
@@ -58,6 +63,11 @@ pipeline {
           }
         
       }
+      when {
+        expression {
+          params.CREATE_OR_DESTROY == "Create"
+        }
+      } 
     }
 
     stage('terraform apply') {
@@ -75,7 +85,35 @@ pipeline {
         }
         
       }
+      when {
+        expression {
+          params.CREATE_OR_DESTROY == "Create"
+        }
     }
 
   }
+
+    stage('terraform destroy') {
+      agent {
+        docker {
+          image 'hashicorp/terraform:1.9.8'
+          args '--entrypoint ""'
+        }
+      }
+      steps {
+        dir('terraform') {
+          sh '''
+          terraform apply -destroy -no-color -auto-approve
+          '''
+        }
+        
+      }
+      when {
+        expression {
+          params.CREATE_OR_DESTROY == "Destroy"
+        }
+    }
+
+  }
+
 }
