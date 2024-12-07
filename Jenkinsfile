@@ -10,7 +10,7 @@ pipeline {
   parameters {
     choice(name: 'CREATE_OR_DESTROY',
     choices: ['Create', 'Destroy'],
-    description: 'WOuld you like to create or destroy the kubernetes cluster')
+    description: 'Would you like to create or destroy the kubernetes cluster')
   }
 
    stages {
@@ -31,7 +31,7 @@ pipeline {
         }
       }
     }
-    
+
     stage('terraform init') {
       agent {
         docker {
@@ -61,7 +61,6 @@ pipeline {
           terraform plan -no-color
           '''
           }
-        
       }
       when {
         expression {
@@ -82,16 +81,14 @@ pipeline {
           sh '''
           terraform apply -no-color -auto-approve
           '''
-        }
-        
+        } 
       }
       when {
         expression {
           params.CREATE_OR_DESTROY == "Create"
         }
+      }
     }
-
-  }
 
     stage('terraform destroy') {
       agent {
@@ -105,15 +102,14 @@ pipeline {
           sh '''
           terraform apply -destroy -no-color -auto-approve
           '''
-        }
-        
+        }        
       }
       when {
         expression {
           params.CREATE_OR_DESTROY == "Destroy"
         }
+      }
     }
 
   }
-
 }
