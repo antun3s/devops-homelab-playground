@@ -8,9 +8,10 @@ pipeline {
     JENKINS_PUB_KEY = credentials('jenkins-pub-key')
   }
   parameters {
-    choice(name: 'CREATE_OR_DESTROY',
-    choices: ['Create', 'Destroy'],
-    description: 'Would you like to create or destroy the kubernetes cluster')
+    choice(
+      name: 'CREATE_OR_DESTROY',
+      choices: ['Create', 'Destroy'],
+      description: 'Would you like to create or destroy the kubernetes cluster')
   }
 
    stages {
