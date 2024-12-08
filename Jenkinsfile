@@ -102,6 +102,7 @@ pipeline {
         dir('terraform') {
           sh '''
             export ANSIBLE_ROLES_PATH="$ANSIBLE_ROLES_PATH:/kubespray/roles"
+            export ANSIBLE_HOST_KEY_CHECKING="False"
 
             ansible-playbook \
               --become \
