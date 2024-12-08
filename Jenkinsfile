@@ -102,8 +102,8 @@ pipeline {
         dir('terraform') {
           sh '''
           ansible-playbook \
-            -- become \
-            -- inventory inventory.ini
+            --become \
+            --inventory inventory.ini
             --extra-vars "kube_network_plugins=flannel" \
             --private-key id_ed25519
             /kubespray/cluster.yml
