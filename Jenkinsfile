@@ -14,8 +14,8 @@ pipeline {
       description: 'Would you like to create or destroy the kubernetes cluster?'
     )
     choice(
-      name: 'KUBESPRAY_RUN'
-      choices: ['Skip', 'Run']
+      name: 'KUBESPRAY_RUN',
+      choices: ['Skip', 'Run'],
       description 'Would you like to skip ou run Kubespray?'
     )
   }
