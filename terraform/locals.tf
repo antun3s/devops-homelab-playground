@@ -52,7 +52,7 @@ locals {
     # hardware info
     cores     = 2
     disk_size = "21G"
-    memory    = 2048
+    memory    = 1024
     sockets   = 1
 
     # 192.168.0.7x and so on...
@@ -69,7 +69,7 @@ locals {
 
     cores     = 1
     disk_size = "21G"
-    memory    = 2048
+    memory    = 1024
     sockets   = 1
 
     network_last_octect = 90
