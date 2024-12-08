@@ -91,6 +91,32 @@ pipeline {
       }
     }
 
+    stage('kubespray') {
+      agent {
+        docker {
+          image 'quay.io/kubespray/kubespray:v2.25.0'
+          args '--entrypoint "" -u root'
+        }
+      }
+      steps {
+        dir('terraform') {
+          sh '''
+          ansible-playbook \
+            -- become \
+            -- inventory inventory.ini
+            --extra-vars "kube_network_plugins=flannel" \
+            --private-key id_ed25519
+            /kubespray/cluster.yml
+          '''
+        } 
+      }
+      when {
+        expression {
+          params.CREATE_OR_DESTROY == "Create"
+        }
+      }
+    }
+
     stage('terraform destroy') {
       agent {
         docker {
