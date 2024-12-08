@@ -16,7 +16,7 @@ pipeline {
     choice(
       name: 'KUBESPRAY_RUN',
       choices: ['Skip', 'Run'],
-      description 'Would you like to skip ou run Kubespray?'
+      description: 'Would you like to skip ou run Kubespray?'
     )
   }
 
