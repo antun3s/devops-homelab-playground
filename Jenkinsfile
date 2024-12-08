@@ -37,10 +37,7 @@ pipeline {
       agent {
         docker {
           image 'hashicorp/terraform:1.9.8'
-          args ' \
-            --entrypoint "" \
-            --network=host \
-            '
+          args '--entrypoint "" --network=host'
           
         }
       }
@@ -57,7 +54,7 @@ pipeline {
       agent {
         docker {
           image 'hashicorp/terraform:1.9.8'
-          args '--entrypoint ""'
+          args '--entrypoint "" --network=host'
         }
       }
       steps {
@@ -78,7 +75,7 @@ pipeline {
       agent {
         docker {
           image 'hashicorp/terraform:1.9.8'
-          args '--entrypoint ""'
+          args '--entrypoint "" --network=host'
         }
       }
       steps {
