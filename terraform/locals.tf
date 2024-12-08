@@ -44,7 +44,7 @@ locals {
   # master specific configuration
   masters = {
     # how many nodes?
-    count = 3
+    count = 2
 
     name_prefix = "k8s-master"
     vmid_prefix = 300
