@@ -11,7 +11,13 @@ pipeline {
     choice(
       name: 'CREATE_OR_DESTROY',
       choices: ['Create', 'Destroy'],
-      description: 'Would you like to create or destroy the kubernetes cluster')
+      description: 'Would you like to create or destroy the kubernetes cluster?'
+    )
+    choice(
+      name: 'KUBESPRAY_RUN'
+      choices: ['Skip', 'Run']
+      description 'Would you like to skip ou run Kubespray?'
+    )
   }
 
    stages {
@@ -116,7 +122,8 @@ pipeline {
       }
       when {
         expression {
-          params.CREATE_OR_DESTROY == "Create"
+          params.CREATE_OR_DESTROY == "Create" &&
+          params.KUBESPRAY_RUN == "Run"                 
         }
       }
     }
