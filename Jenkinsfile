@@ -101,8 +101,8 @@ pipeline {
       steps {
         dir('terraform') {
           sh '''
-            export ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:/kubespray/roles"
-            
+            export ANSIBLE_ROLES_PATH="$ANSIBLE_ROLES_PATH:/kubespray/roles"
+
             ansible-playbook \
               --become \
               --inventory inventory.ini \
