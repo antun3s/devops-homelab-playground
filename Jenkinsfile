@@ -50,7 +50,7 @@ pipeline {
       steps {
         dir('terraform') {
           sh '''
-          terraform init -reconfigure -no-color
+          terraform init -no-color
           '''
         }
       }
