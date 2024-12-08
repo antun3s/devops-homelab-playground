@@ -101,12 +101,14 @@ pipeline {
       steps {
         dir('terraform') {
           sh '''
-          ansible-playbook \
-            --become \
-            --inventory inventory.ini \
-            --extra-vars "kube_network_plugins=flannel" \
-            --private-key id_ed25519 \
-            /kubespray/cluster.yml
+            export ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH:/kubespray/roles"
+            
+            ansible-playbook \
+              --become \
+              --inventory inventory.ini \
+              --extra-vars "kube_network_plugins=flannel" \
+              --private-key id_ed25519 \
+              /kubespray/cluster.yml
           '''
         } 
       }
