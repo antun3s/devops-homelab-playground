@@ -43,7 +43,7 @@ pipeline {
       steps {
         dir('terraform') {
           sh '''
-          terraform init -no-color
+          terraform init -migrate-state -no-color
           '''
         }
       }
